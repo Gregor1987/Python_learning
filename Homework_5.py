@@ -11,7 +11,7 @@ print(result_text)
 # Условие задачи: На столе лежит 2021 конфета. Играют два игрока делая ход друг после друга. Первый ход определяется жеребьёвкой.
 # За один ход можно забрать не более чем 28 конфет. Все конфеты оппонента достаются сделавшему последний ход.
 
-import random
+from random import randint
 
 
 def win_condition(candies):
@@ -31,7 +31,7 @@ def player_turn(message):
 
 
 candies = 2021
-dice = random.randint(1, 2)
+dice = randint(1, 2)
 if dice == 1:
     print(f'Player {dice} goes first')
     for i in range(2022):
@@ -53,7 +53,7 @@ else:
 
 # a) Добавьте игру против бота
 
-import random
+from random import randint
 
 
 def win_condition(candies):
@@ -73,13 +73,13 @@ def player_turn(message):
     elif candies <= 28:
         turn = candies
     else:
-        turn = random.randint(1, 28)
+        turn = randint(1, 28)
         print(f'Bot takes {turn} candies')
     return turn
 
 
 candies = 2021
-dice = random.randint(1, 2)
+dice = randint(1, 2)
 if dice == 1:
     print('Player goes first')
     for i in range(2022):
@@ -99,7 +99,7 @@ else:
 
 # b) Подумайте как наделить бота ""интеллектом""
 
-import random
+from random import randint
 
 
 def win_condition(candies):
@@ -125,13 +125,13 @@ def player_turn(message):
     else:
         turn = candies - 29 * ((140 - i) // 2)
         if turn == 0:
-            turn = random.randint(1, 28)
+            turn = randint(1, 28)
         print(f'Bot takes {turn} candies')
     return turn
 
 
 candies = 2021
-dice = random.randint(1, 2)
+dice = randint(1, 2)
 if dice == 1:
     print('Player goes first')
     for i in range(140):
@@ -214,7 +214,7 @@ for i in range(9):
 
 # Var_2 Player vs Bot
 
-import random
+from random import randint
 
 
 def print_field(field_el):
@@ -265,7 +265,7 @@ def player_turn(message=''):
                 field[turn[1] + 5] = x
     else:
         x = ' 0 '
-        turn = [random.randint(1, 3), random.randint(1, 3)]
+        turn = [randint(1, 3), randint(1, 3)]
         if turn[0] == 1:
             if field[turn[1] - 1] != ' - ':
                 player_turn()
@@ -289,7 +289,7 @@ def player_turn(message=''):
 
 field = [' - ', ' - ', ' - ', ' - ', ' - ', ' - ', ' - ', ' - ', ' - ']
 print_field(field)
-dice = random.randint(1, 2)
+dice = randint(1, 2)
 if dice == 1:
     print('Player goes first')
     for i in range(9):
@@ -310,3 +310,47 @@ else:
             print()
         if i == 9:
             print('Draw')
+
+# Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных.
+# Входные и выходные данные хранятся в отдельных текстовых файлах.
+
+from random import randint
+
+with open ('initial file.txt', 'w', encoding='utf-8') as file:  # generating file
+    for i in range(1, 20):
+        file.write(randint(1, 10) * chr(0x0040 + i))
+    alphabet = ['A', 'B', 'C', 'D', 'E', 'F']
+    for i in alphabet:
+        file.write(randint(1, 10) * eval(f'chr(0x004{i})'))
+    file.write(randint(1, 10) * chr(0x005A))
+
+with open('initial file.txt', 'r', encoding='utf-8') as file:  # reading file
+    long_string = file.read()
+
+short_string = ''  # packing string from file
+count = 1
+for i in range(1, len(long_string)):
+    if long_string[i] == long_string[i - 1]:
+        count += 1
+    else:
+        short_string += (str(count) + long_string[i - 1])
+        count = 1
+short_string += str(long_string.count(long_string[-1])) + long_string[-1]
+
+with open('packed_file.txt', 'w', encoding='utf-8') as file:  # saving packed string to new file
+    file.write(short_string)
+
+with open('packed_file.txt', 'r', encoding='utf-8') as file:  # reading packed file
+    packed_string = file.read()
+
+unpacked_string = ''
+multiplier = ''
+for i in range(len(packed_string)):  # unpacking
+    if packed_string[i].isdigit():
+        multiplier += packed_string[i]
+    else:
+        unpacked_string += int(multiplier) * packed_string[i]
+        multiplier = ''
+
+with open('unpacked_file.txt', 'w', encoding='utf-8') as file:  # saving unpacked string to 3rd file
+    file.write(unpacked_string)
