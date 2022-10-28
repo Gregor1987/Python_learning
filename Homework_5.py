@@ -174,7 +174,7 @@ def win_condition(n, x):
         win = True
         print_field(field)
         print(f'Player {i % 2 + 1} wins!')
-        return win
+    return win
 
 
 def player_turn(message):
