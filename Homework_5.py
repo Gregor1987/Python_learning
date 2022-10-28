@@ -333,9 +333,15 @@ for i in range(1, len(long_string)):
     if long_string[i] == long_string[i - 1]:
         count += 1
     else:
-        short_string += (str(count) + long_string[i - 1])
+        if count == 1:
+            short_string += long_string[i - 1]
+        else:
+            short_string += (str(count) + long_string[i - 1])
         count = 1
-short_string += str(long_string.count(long_string[-1])) + long_string[-1]
+if long_string.count(long_string[-1]) == 1:
+    short_string += long_string[-1]
+else:
+    short_string += str(long_string.count(long_string[-1])) + long_string[-1]
 
 with open('packed_file.txt', 'w', encoding='utf-8') as file:  # saving packed string to new file
     file.write(short_string)
@@ -349,7 +355,10 @@ for i in range(len(packed_string)):  # unpacking
     if packed_string[i].isdigit():
         multiplier += packed_string[i]
     else:
-        unpacked_string += int(multiplier) * packed_string[i]
+        if multiplier == '':
+            unpacked_string += packed_string[i]
+        else:
+            unpacked_string += int(multiplier) * packed_string[i]
         multiplier = ''
 
 with open('unpacked_file.txt', 'w', encoding='utf-8') as file:  # saving unpacked string to 3rd file
