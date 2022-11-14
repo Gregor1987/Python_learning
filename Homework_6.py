@@ -23,7 +23,7 @@ def modify_line(some_line):
         if some_line[i].isdigit() and len(some_line[i]) < 2:
             some_line[i] = '0' + some_line[i]
             insert_quotes(some_line, i)
-        elif some_line[i].isdigit():
+        elif some_line[i].isdigit() and "." not in some_line[i]:
             insert_quotes(some_line, i)
         elif ('+' in some_line[i] or '-' in some_line[i]) and len(some_line[i]) == 2:
             some_line[i] = some_line[i][0] + '0' + some_line[i][1]
