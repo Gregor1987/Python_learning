@@ -119,12 +119,9 @@ print_prices(price_list)
 
 # Создать новый список, содержащий те же цены, но отсортированные по убыванию.
 
-new_price_list = []
-for i in range(len(price_list)):
-    new_price_list.insert(0, price_list[i])
+new_price_list = sorted(price_list, reverse=True)
 print_prices(new_price_list)
 
 # Вывести цены пяти самых дорогих товаров. Сможете ли вывести цены этих товаров по возрастанию, написав минимум кода?
 
-five_most_expensive = price_list[-5:]
-print_prices(five_most_expensive)
+print_prices(sorted(new_price_list[:5]))
