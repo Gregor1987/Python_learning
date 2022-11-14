@@ -28,25 +28,40 @@ def modify_line(some_line):
         elif ('+' in some_line[i] or '-' in some_line[i]) and len(some_line[i]) == 2:
             some_line[i] = some_line[i][0] + '0' + some_line[i][1]
             insert_quotes(some_line, i)
-        elif '+' in some_line[i] or '-' in some_line[i]:
-            insert_quotes(some_line, i)
+        elif '-' in some_line[i]:
+            check = False  # этот блок проверяет что элемент списка - это число со знаком, а не местоимение,
+            # содержащее знак "-"
+            for j in some_line[i]:
+                if j.isdigit():
+                    check = True
+            if check:
+                insert_quotes(some_line, i)
     return some_line
 
 
 def print_line(any_line):
     count = 0
-    for i in range(len(any_line)):
+    for i in range(len(any_line) - 1):
         if any_line[i] == '"':
             count += 1
             if count % 2 != 0:
                 print(f'{any_line[i]}', end='')
             else:
                 print(f'{any_line[i]}', end=' ')
-        elif any_line[i].isdigit() or '+' in any_line[i] or '-' in any_line[i]:
+        elif any_line[i].isdigit() or '+' in any_line[i]:
             print(f'{any_line[i]}', end='')
+        elif '-' in any_line[i]:
+            check = False
+            for j in any_line[i]:
+                if j.isdigit():
+                    check = True
+            if check:
+                print(f'{any_line[i]}', end='')
+            else:
+                print(f'{any_line[i]}', end=' ')
         else:
             print(f'{any_line[i]}', end=' ')
-    print()
+    print(f'{any_line[-1]}')
 
 
 line = ['в', '5', 'часов', '17', 'минут', 'температура', 'воздуха', 'была', '+5', 'градусов']
