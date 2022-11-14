@@ -109,8 +109,6 @@ def print_prices(some_list):
 
 
 price_list = [round(random.randint(0, 500) + random.random(), 2) for _ in range(random.randint(10, 21))]
-for i in range(random.randint(10, 20)):
-    price_list.append(round(random.randint(0, 500) + random.random(), 2))
 print_prices(price_list)
 
 # Вывести цены, отсортированные по возрастанию, новый список не создавать
