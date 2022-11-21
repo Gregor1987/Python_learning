@@ -8,15 +8,15 @@
 
 
 def num_translate(number):
-    vocabluary = {'zero': 'ноль', 'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять',
+    vocabulary = {'zero': 'ноль', 'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять',
                   'six': 'шесть', 'seven': 'семь', 'eight': 'восемь', 'nine': 'девять', 'ten': 'десять'}
-    if number in vocabluary.keys():
-        print(vocabluary[number])
+    if number in vocabulary.keys():
+        return vocabulary[number]
     else:
-        print('такого числа нет')
+        return None
 
 
-num_translate(input('введите число: '))
+print(num_translate(input('Введите число: ')))
 
 # Доработать предыдущую функцию в num_translate_adv(): реализовать корректную работу с числительными,
 # начинающимися с заглавной буквы — результат тоже должен быть с заглавной. Например:
@@ -27,20 +27,20 @@ num_translate(input('введите число: '))
 
 
 def num_translate_adv(number):
-    vocabluary = {'zero': 'ноль', 'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять',
+    vocabulary = {'zero': 'ноль', 'one': 'один', 'two': 'два', 'three': 'три', 'four': 'четыре', 'five': 'пять',
                   'six': 'шесть', 'seven': 'семь', 'eight': 'восемь', 'nine': 'девять', 'ten': 'десять'}
     if number.istitle():
-        if number.lower() in vocabluary.keys():
-            print(vocabluary[number.lower()].capitalize())
+        if number.lower() in vocabulary.keys():
+            return vocabulary[number.lower()].capitalize()
         else:
-            print('такого числа нет')
-    elif number in vocabluary.keys():
-        print(vocabluary[number])
+            return None
+    elif number in vocabulary.keys():
+        return vocabulary[number]
     else:
-        print('такого числа нет')
+        return None
 
 
-num_translate_adv(input('введите число: '))
+print(num_translate_adv(input('Введите число: ')))
 
 # Написать функцию thesaurus(), принимающую в качестве аргументов имена сотрудников и возвращающую словарь,
 #в котором ключи — первые буквы имён, а значения — списки, содержащие имена, начинающиеся с соответствующей буквы. Например:
