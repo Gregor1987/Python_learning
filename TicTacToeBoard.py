@@ -1,6 +1,9 @@
 class TicTacToeBoard:
-
     def __init__(self):
+        self.board = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
+        self.count = 0
+
+    def new_game(self):
         self.board = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
         self.count = 0
 
@@ -13,14 +16,14 @@ class TicTacToeBoard:
         else:
             mark = 'X'
         result = None
-        if (self.board[0][0] == mark and self.board[0][1] == mark and self.board[0][2] == mark) or\
-                (self.board[1][0] == mark and self.board[1][1] == mark and self.board[1][2] == mark) or\
-                (self.board[2][0] == mark and self.board[2][1] == mark and self.board[2][2] == mark) or\
-                (self.board[0][0] == mark and self.board[1][0] == mark and self.board[2][0] == mark) or\
-                (self.board[0][1] == mark and self.board[1][1] == mark and self.board[2][1] == mark) or\
-                (self.board[0][2] == mark and self.board[1][2] == mark and self.board[2][2] == mark) or\
-                (self.board[0][0] == mark and self.board[1][1] == mark and self.board[2][2] == mark) or\
-                (self.board[0][2] == mark and self.board[1][1] == mark and self.board[2][0] == mark):
+        if self.board[0][0] == self.board[0][1] == self.board[0][2] == mark or\
+                self.board[1][0] == self.board[1][1] == self.board[1][2] == mark or\
+                self.board[2][0] == self.board[2][1] == self.board[2][2] == mark or\
+                self.board[0][0] == self.board[1][0] == self.board[2][0] == mark or\
+                self.board[0][1] == self.board[1][1] == self.board[2][1] == mark or\
+                self.board[0][2] == self.board[1][2] == self.board[2][2] == mark or\
+                self.board[0][0] == self.board[1][1] == self.board[2][2] == mark or\
+                self.board[0][2] == self.board[1][1] == self.board[2][0] == mark:
             result = mark
         elif '-' in self.board:
             result = 'D'
